@@ -1,0 +1,10 @@
+# Extra dependency needed ONLY for the two additions below.
+# Everything else this project needs is already in requirements.txt (unchanged).
+#
+#   1. src/low_light.py          -> uses cv2 / numpy, already in requirements.txt, no new dependency
+#   2. dashboard_streamlit.py    -> needs streamlit (new dependency, listed here)
+#
+# Install with:
+#   pip install -r requirements.txt -r requirements-additions.txt
+
+streamlit>=1.30.0

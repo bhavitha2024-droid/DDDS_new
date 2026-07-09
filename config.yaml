@@ -1,0 +1,43 @@
+# Central configuration for the Intelligent Driver Drowsiness Detection (LSTM) project
+
+feature_extraction:
+  ear_left_indices: [33, 160, 158, 133, 153, 144]     # MediaPipe FaceMesh landmark ids, left eye
+  ear_right_indices: [362, 385, 387, 263, 373, 380]   # right eye
+  mouth_indices: [61, 291, 39, 181, 0, 17, 269, 405]  # outer/inner lip points for MAR
+  target_fps: 30
+  clahe_clip_limit: 2.0
+  clahe_tile_grid: [8, 8]
+
+window:
+  sequence_length: 30        # frames per LSTM window (~1s @30fps)
+  stride: 5                  # sliding window stride when building training sequences
+
+personalization:
+  enabled: false               # subject-relative EAR/MAR/pose normalization (see calibration.py)
+  ear_relative_threshold: 0.75 # used by the rule-based baseline WHEN personalization is enabled
+                               # (fraction of a driver's own baseline EAR, not an absolute value)
+
+model:
+  input_dim: 7
+  hidden_dim: 64
+  num_layers: 2
+  num_classes: 3             # 0 Alert, 1 Drowsy, 2 Highly Drowsy
+  dropout: 0.3
+  bidirectional: false
+
+train:
+  batch_size: 32
+  epochs: 40
+  learning_rate: 0.001
+  weight_decay: 0.0001
+  val_split: 0.15
+  test_split: 0.15
+  early_stopping_patience: 8
+  checkpoint_dir: models
+
+alerts:
+  smoothing_window: 3        # predictions averaged/majority-voted over last K windows
+  drowsy_cooldown_sec: 4
+  highly_drowsy_cooldown_sec: 2
+  ear_sanity_threshold: 0.21   # auxiliary rule-based cross-check, not the primary decision
+  mar_sanity_threshold: 0.6

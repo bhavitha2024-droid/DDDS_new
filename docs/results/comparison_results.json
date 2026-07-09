@@ -1,0 +1,50 @@
+[
+  {
+    "model": "Existing: Rule-Based (base-paper style)",
+    "accuracy": 0.6982456140350877,
+    "precision_macro": 0.6960822782279856,
+    "recall_macro": 0.7072732714756061,
+    "f1_macro": 0.6758687492798057,
+    "confusion_matrix": [
+      [
+        263,
+        36,
+        0
+      ],
+      [
+        65,
+        105,
+        129
+      ],
+      [
+        15,
+        13,
+        229
+      ]
+    ]
+  },
+  {
+    "model": "Proposed: LSTM (temporal)",
+    "accuracy": 0.9883040935672515,
+    "precision_macro": 0.9884361437175363,
+    "recall_macro": 0.9886695383227272,
+    "f1_macro": 0.9884550448795646,
+    "confusion_matrix": [
+      [
+        299,
+        0,
+        0
+      ],
+      [
+        6,
+        290,
+        3
+      ],
+      [
+        0,
+        1,
+        256
+      ]
+    ]
+  }
+]
